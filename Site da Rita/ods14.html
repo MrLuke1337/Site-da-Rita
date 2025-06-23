@@ -1,0 +1,295 @@
+<!-- ods14.html -->
+<!DOCTYPE html> <!-- Define o tipo do documento como HTML5 -->
+<html lang="pt-br"> <!-- Define o idioma da página como português do Brasil -->
+<head>
+  <meta charset="UTF-8" /> <!-- Define o conjunto de caracteres como UTF-8 -->
+  <title>Vida na Água</title> <!-- Título da aba do navegador -->
+  <style>
+    * {
+      margin: 0; /* Remove a margem padrão de todos os elementos */
+      padding: 0; /* Remove o espaçamento interno padrão */
+      box-sizing: border-box; /* Faz com que padding e border sejam incluídos no tamanho total dos elementos */
+      font-family: 'Segoe UI', sans-serif; /* Define a fonte padrão da página */
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #e0f7fa, #e8f5e9); /* Fundo com gradiente suave */
+      color: #003300; /* Cor do texto principal */
+      line-height: 1.6; /* Espaçamento entre linhas */
+      padding-bottom: 80px; /* Espaço no final da página para o rodapé fixo */
+    }
+
+    nav {
+      background-color: #004d40; /* Cor de fundo da navbar */
+      padding: 10px 15px; /* Espaçamento interno */
+      display: flex; /* Alinha os itens lado a lado */
+      align-items: center; /* Alinha verticalmente ao centro */
+      gap: 30px; /* Espaçamento entre os elementos */
+      position: sticky; /* Faz a navbar ficar fixa no topo ao rolar a página */
+      top: 0;
+      z-index: 10; /* Garante que fique acima de outros elementos */
+    }
+
+    .nav-left {
+      display: flex; /* Alinha itens à esquerda */
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-left img {
+      height: 40px; /* Altura da logo */
+      transition: transform 0.3s; /* Animação ao passar o mouse */
+    }
+
+    .nav-left img:hover {
+      transform: scale(1.1); /* Aumenta a imagem ao passar o mouse */
+    }
+
+    .nav-links {
+      display: flex; /* Links das ODS alinhados horizontalmente */
+      gap: 30px;
+    }
+
+    .ods-icon {
+      height: 50px; /* Altura dos ícones das ODS */
+      transition: transform 0.4s ease, filter 0.4s ease; /* Efeitos suaves */
+    }
+
+    .ods-icon:hover {
+      transform: scale(1.1) rotate(3deg); /* Efeito ao passar o mouse */
+      filter: brightness(1.2); /* Aumenta o brilho */
+    }
+
+    .nav-right {
+      margin-left: auto; /* Empurra o ícone de login para o canto direito */
+    }
+
+    .user-icon {
+      height: 40px; /* Tamanho do ícone de usuário */
+      transition: transform 0.3s ease;
+      cursor: pointer; /* Cursor de clique */
+    }
+
+    .user-icon:hover {
+      transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+    }
+
+    header {
+      position: relative; /* Para posicionar a imagem de fundo */
+      background-color: #00695c; /* Cor de fundo para fallback */
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      height: 200px;
+      margin-bottom: 40px;
+    }
+
+    .header-img-container {
+      position: absolute; /* Imagem como plano de fundo */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Atrás do texto */
+    }
+
+    .header-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Cobre todo o espaço */
+      object-position: center 20%; /* Centraliza a imagem */
+      opacity: 0.35; /* Deixa a imagem transparente */
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 1; /* Garante que o texto fique acima da imagem */
+      font-size: 2.6em;
+    }
+
+    section {
+      max-width: 1000px; /* Largura máxima da seção */
+      margin: 30px auto; /* Centraliza a seção */
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra suave */
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      color: #004d40;
+    }
+
+    section img {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 160px;
+      border-radius: 8px;
+    }
+
+    p, ul {
+      text-align: justify;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      line-height: 1.5em;
+    }
+
+    ul {
+      list-style: inside disc; /* Bolinhas dentro do bloco */
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #26a69a;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      margin: 0 auto;
+    }
+
+    .button:hover {
+      background-color: #00796b;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #004d40;
+      color: white;
+      padding: 15px 10px;
+      font-size: 0.9em;
+      text-align: center;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+      z-index: 20;
+    }
+
+    footer a {
+      color: #a7ffeb;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegação superior -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html">
+        <img src="zoo/zoo_branco_sem_fundo.png" alt="Logo Zoo">
+      </a>
+      <div class="nav-links">
+        <a href="ods14.html">
+          <img src="ODS/op.png" alt="ODS 14" class="ods-icon">
+        </a>
+        <a href="ods15.html">
+          <img src="https://www.cooperacionespanola.es/wp-content/uploads/2023/09/recurso-15-1024x1024.png" alt="ODS 15" class="ods-icon">
+        </a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">
+        <img src="Login/image-removebg-preview (3).png" alt="Login" class="user-icon">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho com imagem e título -->
+  <header>
+    <div class="header-img-container">
+      <img src="https://www.politize.com.br/wp-content/smush-webp/2024/09/ODS-14-e-a-preservacao-dos-animais-marinhos_-conheca-a-Rede-Biomar-1024x683.jpg.webp" alt="Imagem Marinha" />
+    </div>
+    <h1>Vida na Água</h1>
+  </header>
+
+  
+  <section>
+    <h2>Preservação dos Oceanos</h2>
+    <img src="https://www.cooperacionespanola.es/wp-content/uploads/2023/09/recurso-14.png" alt="oceano"/>
+    <p>Os oceanos são essenciais para a vida no planeta, cobrindo mais de 70% da superfície da Terra e fornecendo recursos alimentares, climáticos e econômicos. A ODS 14 visa conservar e usar de forma sustentável os oceanos, mares e recursos marinhos para o desenvolvimento sustentável.</p>
+  </section>
+
+ 
+  <section>
+    <h2>Principais Metas</h2>
+    <img src="https://maratonaods.com.br/wp-content/uploads/2022/02/1-9.png" alt="metas" />
+    <ul>
+      <li>Reduzir significativamente a poluição marinha.</li>
+      <li>Proteger ecossistemas marinhos e costeiros.</li>
+      <li>Minimizar os efeitos da acidificação dos oceanos.</li>
+      <li>Regulamentar a pesca e acabar com a sobrepesca.</li>
+      <li>Conservar pelo menos 10% das zonas costeiras e marinhas.</li>
+    </ul>
+  </section>
+
+  
+  <section>
+    <h2>Ameaças à Vida Marinha</h2>
+    <img src="https://jornalzonasul.com.br/wp-content/uploads/2018/12/391860.jpg" alt="Poluição Marinha" />
+    <p>A vida na água enfrenta diversas ameaças graves, incluindo a poluição por plástico e produtos químicos, mudanças climáticas que provocam o aquecimento dos oceanos e a acidificação, sobrepesca desenfreada que reduz as populações de peixes e a destruição dos habitats marinhos como recifes de corais e manguezais.</p>
+    <p>Esses fatores não apenas afetam os ecossistemas marinhos, mas também comprometem os meios de subsistência das comunidades que dependem dos recursos do mar.</p>
+  </section>
+
+  
+  <section>
+    <h2>Importância da Biodiversidade Marinha</h2>
+    <img src="https://organicsnewsbrasil.com.br/wp-content/uploads/2016/03/biodiversidade-marinha.jpg" alt="Coral e Peixes" />
+    <p>A biodiversidade marinha inclui milhares de espécies, desde micro-organismos até grandes mamíferos como baleias e golfinhos. Os recifes de corais são conhecidos como “florestas tropicais do mar” por sua incrível variedade biológica e papel essencial na proteção da costa contra erosão.</p>
+    <p>Além disso, ecossistemas como manguezais e pradarias marinhas são cruciais para a reprodução de várias espécies e atuam como sumidouros naturais de carbono.</p>
+  </section>
+
+  
+  <section>
+    <h2>Soluções e Iniciativas para Preservar a Vida Marinha</h2>
+    <img src="https://static.wixstatic.com/media/c4e423_cbcf7cbab8044386bb514a3082bc2d8a~mv2.jpg/v1/fill/w_660,h_480,al_c,lg_1,q_80/c4e423_cbcf7cbab8044386bb514a3082bc2d8a~mv2.jpg" alt="Limpeza de Praia" />
+    <p>Existem diversas ações para proteger os oceanos, como a criação de áreas marinhas protegidas, a regulamentação da pesca, o combate ao lixo plástico e o incentivo à economia azul sustentável. Iniciativas comunitárias e políticas públicas são essenciais para garantir a saúde dos mares e a preservação das espécies marinhas.</p>
+    <p>Você também pode contribuir reduzindo o consumo de plástico, escolhendo frutos do mar de pesca sustentável e apoiando projetos ambientais.</p>
+  </section>
+
+  
+  <section>
+    <h2>Curiosidades sobre a Vida na Água</h2>
+    <img src="https://i.pinimg.com/originals/2b/62/58/2b6258f08211c239d6b2aebd106455bc.png" alt="Baleia Azul"/>
+    <ul>
+      <li>Os recifes de coral ocupam menos de 1% do fundo do oceano, mas abrigam cerca de 25% de toda a vida marinha.</li>
+      <li>O maior animal da Terra, a baleia-azul, pode atingir mais de 30 metros de comprimento.</li>
+      <li>Alguns tubarões podem viver mais de 70 anos, mostrando a importância da proteção dessas espécies.</li>
+      <li>Os manguezais funcionam como berçários naturais para muitas espécies marinhas, protegendo as crias até estarem prontas para o oceano.</li>
+      <li>O oceano produz cerca de metade do oxigênio do planeta, principalmente por meio do fitoplâncton.</li>
+    </ul>
+    <center>
+        <a class="button" href="ods15.html" target="_blank">Conheça a ODS 15</a>
+    </center>
+  </section>
+
+  <!-- Rodapé fixo com links de referência -->
+  <footer>
+    <p>Referências: 
+      <a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ONU Brasil</a> | 
+      <a href="https://www.ipea.gov.br" target="_blank" rel="noopener noreferrer">IPEA</a> | 
+      <a href="https://gtagenda2030.org.br/ods/ods14/" target="_blank" rel="noopener noreferrer">GT Agenda 2030</a> | 
+      <a href="https://www.iberdrola.com/sustentabilidade/comprometidos-objetivos-desenvolvimento-sustentavel/ods-14-proteger-a-vida-marinha" target="_blank" rel="noopener noreferrer">Iberdrola</a>
+    </p>
+  </footer>
+
+</body>
+</html>
