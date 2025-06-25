@@ -1,0 +1,286 @@
+<!DOCTYPE html> <!-- Define o tipo de documento como HTML5 -->
+<html lang="pt-br"> <!-- Define o idioma do documento como português do Brasil -->
+<head>
+  <meta charset="UTF-8" /> <!-- Define a codificação de caracteres como UTF-8 -->
+  <title>ODS 14 e 15 - Página Inicial</title> <!-- Define o título da aba do navegador -->
+  <style>
+    * {
+      margin: 0; /* Remove margens padrão */
+      padding: 0; /* Remove preenchimentos padrão */
+      box-sizing: border-box; /* Inclui padding e borda no cálculo do tamanho */
+      font-family: 'Segoe UI', sans-serif; /* Define a fonte padrão da página */
+    }
+
+    html, body {
+      height: 100%; /* Define altura de html e body como 100% da tela */
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #e0f7fa, #e8f5e9); /* Fundo com gradiente */
+      color: #003300; /* Cor padrão do texto */
+      line-height: 1.6; /* Espaçamento entre linhas */
+      display: flex; /* Usa Flexbox no body */
+      flex-direction: column; /* Organiza os filhos em coluna */
+    }
+
+    main {
+      flex: 1; /* Faz com que o main cresça e ocupe o espaço restante */
+    }
+
+    nav {
+      background-color: #004d40; /* Cor de fundo da barra de navegação */
+      padding: 10px 15px; /* Espaçamento interno */
+      display: flex; /* Flexbox para alinhar os itens do nav */
+      align-items: center; /* Alinha verticalmente ao centro */
+      gap: 30px; /* Espaço entre os elementos */
+      position: sticky; /* Fixa o nav no topo ao rolar */
+      top: 0; /* Define que ficará no topo da página */
+      z-index: 10; /* Garante que o nav fique acima de outros elementos */
+    }
+
+    .nav-left {
+      display: flex; /* Flexbox para os itens à esquerda */
+      align-items: center; /* Alinhamento vertical */
+      gap: 30px; /* Espaçamento entre os itens */
+    }
+
+    .nav-left img {
+      height: 40px; /* Altura da imagem (logo) */
+      transition: transform 0.3s; /* Transição suave ao aplicar transformações */
+    }
+
+    .nav-left img:hover {
+      transform: scale(1.1); /* Aumenta levemente a imagem ao passar o mouse */
+    }
+
+    .nav-links {
+      display: flex; /* Flexbox para os links das ODS */
+      gap: 30px; /* Espaço entre os ícones */
+    }
+
+    .ods-icon {
+      height: 50px; /* Altura dos ícones das ODS */
+      transition: transform 0.4s ease, filter 0.4s ease; /* Animação suave ao interagir */
+    }
+
+    .ods-icon:hover {
+      transform: scale(1.1) rotate(3deg); /* Aumenta e gira o ícone */
+      filter: brightness(1.2); /* Clareia o ícone */
+    }
+
+    .nav-right {
+      margin-left: auto; /* Empurra o conteúdo da direita para o final da linha */
+    }
+
+    .user-icon {
+      height: 40px; /* Altura do ícone de usuário */
+      transition: transform 0.3s ease; /* Transição suave */
+      cursor: pointer; /* Mostra que é clicável */
+    }
+
+    .user-icon:hover {
+      transform: scale(1.1); /* Aumenta o ícone ao passar o mouse */
+    }
+
+    header {
+      position: relative; /* Permite usar posicionamento absoluto dentro */
+      background-color: #00695c; /* Cor de fundo */
+      color: white; /* Cor do texto */
+      height: 200px; /* Altura do cabeçalho */
+      text-align: center; /* Centraliza o texto */
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra leve */
+      overflow: hidden; /* Esconde conteúdos que ultrapassarem */
+    }
+
+    .header-img-container {
+      position: absolute; /* Posição absoluta dentro do header */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Fica atrás do texto */
+    }
+
+    .header-img-container img {
+      width: 100%; /* Largura total */
+      height: 100%; /* Altura total */
+      object-fit: cover; /* Cobre todo o espaço mantendo proporção */
+      object-position: center; /* Centraliza a imagem */
+      opacity: 0.35; /* Deixa a imagem mais transparente */
+    }
+
+    header h1 {
+      position: relative; /* Fica acima da imagem */
+      z-index: 1; /* Garante que apareça sobre a imagem */
+      font-size: 2.8em; /* Tamanho da fonte */
+      margin: 0; /* Remove margem padrão */
+      line-height: 200px; /* Alinha o texto verticalmente */
+    }
+
+    section {
+      max-width: 1000px; /* Largura máxima do conteúdo */
+      margin: 50px auto; /* Centraliza na página */
+      padding: 20px; /* Espaçamento interno */
+      background: white; /* Fundo branco */
+      border-radius: 16px; /* Bordas arredondadas */
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra para dar destaque */
+    }
+
+    h2 {
+      text-align: center; /* Centraliza o título */
+      font-size: 2.2em; /* Tamanho da fonte */
+      margin-bottom: 20px; /* Espaço abaixo do título */
+      color: #004d40; /* Cor do texto */
+    }
+
+    section img {
+      display: block; /* Define como bloco para permitir centralização */
+      margin: 0 auto 30px auto; /* Centraliza a imagem */
+      width: 160px; /* Largura da imagem */
+    }
+
+    ul {
+      margin-top: 10px; /* Espaço acima */
+      margin-bottom: 20px; /* Espaço abaixo */
+      padding-left: 20px; /* Espaçamento à esquerda */
+    }
+
+    li {
+      margin-bottom: 8px; /* Espaço entre os itens da lista */
+    }
+
+    p {
+      text-align: justify; /* Justifica o texto */
+      font-size: 1.1em; /* Tamanho da fonte */
+      margin-bottom: 20px; /* Espaço abaixo do parágrafo */
+    }
+
+    .button {
+      display: inline-block; /* Permite definir tamanho e margens */
+      padding: 12px 24px; /* Espaçamento interno */
+      background-color: #26a69a; /* Cor de fundo do botão */
+      color: white; /* Cor do texto */
+      border-radius: 8px; /* Bordas arredondadas */
+      text-decoration: none; /* Remove sublinhado */
+      font-weight: bold; /* Negrito */
+      transition: background-color 0.3s, transform 0.3s; /* Animações */
+    }
+
+    .button:hover {
+      background-color: #00796b; /* Cor ao passar o mouse */
+      transform: scale(1.05); /* Aumenta o botão */
+    }
+
+    footer {
+      width: 100%; /* Largura total */
+      text-align: center; /* Centraliza o texto */
+      padding: 20px; /* Espaçamento interno */
+      background: #004d40; /* Cor de fundo */
+      color: white; /* Cor do texto */
+      box-sizing: border-box; /* Inclui padding no tamanho total */
+    }
+
+    footer a {
+      color: #a7ffeb; /* Cor dos links no rodapé */
+      text-decoration: none; /* Remove sublinhado */
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em; /* Reduz o tamanho da fonte no mobile */
+        line-height: normal; /* Alinhamento vertical padrão */
+        padding: 30px 10px; /* Espaçamento interno */
+      }
+
+      h2 {
+        font-size: 1.6em; /* Reduz o tamanho do título */
+      }
+
+      section {
+        margin: 20px; /* Reduz margens nas laterais */
+      }
+
+      .nav-left {
+        flex-direction: column; /* Organiza itens em coluna */
+        align-items: flex-start; /* Alinha à esquerda */
+        gap: 15px; /* Espaçamento menor */
+      }
+
+      .nav-links {
+        flex-direction: column; /* Ícones um embaixo do outro */
+        gap: 10px; /* Espaço menor */
+      }
+
+      .ods-icon {
+        height: 40px; /* Ícones menores no mobile */
+      }
+
+      .nav-right {
+        margin-left: 0;
+        margin-top: 10px; /* Adiciona espaço acima no mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav> <!-- Início da barra de navegação -->
+    <div class="nav-left"> <!-- Lado esquerdo do nav com logo e links -->
+      <a href="index.html"> <!-- Link para a página inicial -->
+        <img src="zoo/zoo_branco_sem_fundo.png" alt="Logo Zoo"> <!-- Logo -->
+      </a>
+      <div class="nav-links"> <!-- Links para ODS 14 e 15 -->
+        <a href="ods14.html">
+          <img src="ODS/op.png" alt="ODS 14" class="ods-icon"> <!-- Ícone ODS 14 -->
+        </a>
+        <a href="ods15.html">
+          <img src="https://www.cooperacionespanola.es/wp-content/uploads/2023/09/recurso-15-1024x1024.png" alt="ODS 15" class="ods-icon"> <!-- Ícone ODS 15 -->
+        </a>
+      </div>
+    </div>
+    <div class="nav-right"> <!-- Lado direito do nav com ícone de login -->
+      <a href="login.html"> <!-- Link para a página de login -->
+        <img src="Login/image-removebg-preview (3).png" alt="Login" class="user-icon"> <!-- Ícone de login -->
+      </a>
+    </div>
+  </nav>
+
+  <main> <!-- Conteúdo principal -->
+    <header> <!-- Cabeçalho com imagem de fundo e título -->
+      <div class="header-img-container"> <!-- Container da imagem de fundo -->
+        <img src="https://www.piramidal.com.br/blog/wp-content/uploads/2023/09/diferenca-sustentabilidade-e-desenvolvimento-sustentavel.png" alt="Imagem Header"> <!-- Imagem de fundo -->
+      </div>
+      <h1>Objetivos de Desenvolvimento Sustentável</h1> <!-- Título principal -->
+    </header>
+
+    <section> <!-- Seção de introdução -->
+      <h2>O que são as ODS?</h2> <!-- Título da seção -->
+      <p> <!-- Parágrafo explicativo -->
+        As <strong>ODS</strong> (Objetivos de Desenvolvimento Sustentável) são 17 metas globais definidas pela
+        <strong>Organização das Nações Unidas (ONU)</strong> como parte da Agenda 2030. Elas visam acabar com a pobreza,
+        proteger o meio ambiente e garantir que todas as pessoas tenham paz e prosperidade até o ano de 2030.
+      </p>
+      <p>
+        Essas metas abrangem áreas como educação, saúde, igualdade de gênero, água potável, energia limpa, crescimento
+        econômico, redução das desigualdades e proteção dos ecossistemas terrestres e marinhos — como os abordados na
+        <strong>ODS 14</strong> (Vida na Água) e <strong>ODS 15</strong> (Vida Terrestre).
+      </p>
+      <p>
+        Todos têm um papel a cumprir. Seja através de atitudes individuais, decisões políticas ou ações coletivas, cada passo
+        em direção à sustentabilidade contribui para um futuro melhor para todos.
+      </p>
+      <center>
+        <a class="button" href="ods14.html" target="_blank">Conheça a ODS 14</a> <!-- Botão que leva para ODS 14 -->
+      </center>
+    </section>
+  </main>
+
+  <footer> <!-- Rodapé da página -->
+    <p>Referências: 
+      <a href="https://brasil.un.org/pt-br/sdgs">ONU Brasil</a> | 
+      <a href="https://www.ipea.gov.br">IPEA</a> | 
+      <a href="https://gtagenda2030.org.br/ods/ods14/">GT Agenda 2030</a> | 
+      <a href="https://www.iberdrola.com/sustentabilidade/comprometidos-objetivos-desenvolvimento-sustentavel/ods-14-proteger-a-vida-marinha">Iberdrola</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html> <!-- Define o documento como HTML5 -->
+<html lang="pt-br"> <!-- Define idioma português do Brasil -->
+<head>
+  <meta charset="UTF-8" /> <!-- Codificação de caracteres UTF-8 -->
+  <title>Login / Cadastro</title> <!-- Título da página -->
+  <style>
+    body {
+      margin: 0; /* Remove margem padrão */
+      font-family: 'Segoe UI', sans-serif; /* Define fonte */
+      background: linear-gradient(to bottom right, #e0f7fa, #e8f5e9); /* Fundo gradiente */
+      display: flex; /* Usa flexbox */
+      justify-content: center; /* Centraliza horizontalmente */
+      align-items: center; /* Centraliza verticalmente */
+      height: 100vh; /* Altura da viewport */
+    }
+
+    .container {
+      background-color: white; /* Fundo branco */
+      padding: 40px; /* Espaçamento interno */
+      border-radius: 16px; /* Bordas arredondadas */
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra */
+      width: 320px; /* Largura fixa */
+    }
+
+    h2 {
+      text-align: center; /* Centraliza texto */
+      margin-bottom: 30px; /* Espaço abaixo */
+      color: #004d40; /* Cor do texto */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%; /* Largura total */
+      padding: 12px; /* Espaçamento interno */
+      margin-bottom: 20px; /* Espaço abaixo */
+      border: 1px solid #ccc; /* Borda cinza clara */
+      border-radius: 8px; /* Bordas arredondadas */
+      font-size: 1em; /* Tamanho da fonte */
+    }
+
+    button {
+      width: 100%; /* Largura total */
+      padding: 12px; /* Espaçamento interno */
+      background-color: #26a69a; /* Cor de fundo */
+      color: white; /* Cor do texto */
+      border: none; /* Remove borda */
+      border-radius: 8px; /* Bordas arredondadas */
+      font-size: 1em; /* Tamanho da fonte */
+      font-weight: bold; /* Negrito */
+      cursor: pointer; /* Cursor de mão */
+      transition: background-color 0.3s ease; /* Transição suave ao mudar cor */
+      margin-bottom: 10px; /* Espaço abaixo */
+    }
+
+    button:hover {
+      background-color: #00796b; /* Cor ao passar o mouse */
+    }
+
+    .toggle-link {
+      text-align: center; /* Centraliza texto */
+      color: #004d40; /* Cor do texto */
+      cursor: pointer; /* Cursor de mão */
+      font-weight: bold; /* Negrito */
+      text-decoration: underline; /* Sublinhado */
+      margin-top: 10px; /* Espaço acima */
+    }
+
+    .error-message, .success-message {
+      text-align: center; /* Centraliza texto */
+      margin-bottom: 15px; /* Espaço abaixo */
+      display: none; /* Escondido por padrão */
+      font-weight: bold; /* Negrito */
+    }
+
+    .error-message {
+      color: red; /* Cor vermelha para erros */
+    }
+
+    .success-message {
+      color: green; /* Cor verde para sucesso */
+    }
+
+    .back-link {
+      display: block; /* Exibe como bloco */
+      text-align: center; /* Centraliza texto */
+      margin-top: 20px; /* Espaço acima */
+      text-decoration: none; /* Remove sublinhado */
+      color: #004d40; /* Cor do texto */
+      font-weight: bold; /* Negrito */
+    }
+
+    .back-link:hover {
+      text-decoration: underline; /* Sublinhado ao passar o mouse */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Login Form -->
+    <div id="login-form">
+      <h2>Entrar</h2>
+      <div class="error-message" id="login-error">Usuário ou senha incorretos.</div> <!-- Mensagem de erro de login -->
+      <input type="text" id="login-username" placeholder="Usuário" required /> <!-- Campo usuário login -->
+      <input type="password" id="login-password" placeholder="Senha" required /> <!-- Campo senha login -->
+      <button id="login-btn">Login</button> <!-- Botão login -->
+      <div class="toggle-link" id="show-register">Criar ou cadastrar conta</div> <!-- Link para mostrar cadastro -->
+    </div>
+
+    <!-- Register Form -->
+    <div id="register-form" style="display:none;">
+      <h2>Cadastrar Conta</h2>
+      <div class="error-message" id="register-error"></div> <!-- Mensagem de erro cadastro -->
+      <div class="success-message" id="register-success"></div> <!-- Mensagem de sucesso cadastro -->
+      <input type="text" id="register-username" placeholder="Novo usuário" required /> <!-- Campo usuário cadastro -->
+      <input type="password" id="register-password" placeholder="Nova senha" required /> <!-- Campo senha cadastro -->
+      <button id="register-btn">Cadastrar</button> <!-- Botão cadastrar -->
+      <div class="toggle-link" id="show-login">Já possui uma conta? Entrar</div> <!-- Link para mostrar login -->
+    </div>
+
+    <a href="index.html" class="back-link">← Voltar</a> <!-- Link para voltar à página inicial -->
+  </div>
+
+  <script>
+    // Seleciona os formulários pelo id
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    // Seleciona elementos de mensagens
+    const loginError = document.getElementById('login-error');
+    const registerError = document.getElementById('register-error');
+    const registerSuccess = document.getElementById('register-success');
+
+    // Seleciona campos de login
+    const loginUsername = document.getElementById('login-username');
+    const loginPassword = document.getElementById('login-password');
+    const loginBtn = document.getElementById('login-btn');
+
+    // Seleciona campos de cadastro
+    const registerUsername = document.getElementById('register-username');
+    const registerPassword = document.getElementById('register-password');
+    const registerBtn = document.getElementById('register-btn');
+
+    // Seleciona links para alternar formulários
+    const showRegister = document.getElementById('show-register');
+    const showLogin = document.getElementById('show-login');
+
+    // Evento para mostrar formulário de cadastro e esconder login
+    showRegister.addEventListener('click', () => {
+      loginForm.style.display = 'none'; // Esconde login
+      registerForm.style.display = 'block'; // Mostra cadastro
+      clearMessages(); // Limpa mensagens de erro/sucesso
+      clearInputs(); // Limpa campos de texto
+    });
+
+    // Evento para mostrar formulário de login e esconder cadastro
+    showLogin.addEventListener('click', () => {
+      registerForm.style.display = 'none'; // Esconde cadastro
+      loginForm.style.display = 'block'; // Mostra login
+      clearMessages(); // Limpa mensagens de erro/sucesso
+      clearInputs(); // Limpa campos de texto
+    });
+
+    // Função para limpar mensagens de erro e sucesso
+    function clearMessages() {
+      loginError.style.display = 'none'; // Esconde mensagem erro login
+      registerError.style.display = 'none'; // Esconde mensagem erro cadastro
+      registerSuccess.style.display = 'none'; // Esconde mensagem sucesso cadastro
+    }
+
+    // Função para limpar os campos de input
+    function clearInputs() {
+      loginUsername.value = ''; // Limpa campo usuário login
+      loginPassword.value = ''; // Limpa campo senha login
+      registerUsername.value = ''; // Limpa campo usuário cadastro
+      registerPassword.value = ''; // Limpa campo senha cadastro
+    }
+
+    // Função para obter usuários do localStorage (objeto com username => senha)
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('users') || '{}'); // Pega usuários ou retorna objeto vazio
+    }
+
+    // Função para salvar usuários no localStorage
+    function saveUsers(users) {
+      localStorage.setItem('users', JSON.stringify(users)); // Salva objeto usuários como string JSON
+    }
+
+    // Evento ao clicar no botão de cadastrar
+    registerBtn.addEventListener('click', () => {
+      clearMessages(); // Limpa mensagens
+      const username = registerUsername.value.trim(); // Pega e limpa espaços do username
+      const password = registerPassword.value.trim(); // Pega e limpa espaços da senha
+
+      if (username.length < 3) { // Valida tamanho mínimo username
+        registerError.textContent = 'Usuário deve ter ao menos 3 caracteres.';
+        registerError.style.display = 'block'; // Exibe erro
+        return; // Para execução
+      }
+
+      if (password.length < 4) { // Valida tamanho mínimo senha
+        registerError.textContent = 'Senha deve ter ao menos 4 caracteres.';
+        registerError.style.display = 'block'; // Exibe erro
+        return; // Para execução
+      }
+
+      const users = getUsers(); // Obtém usuários cadastrados
+      if (users[username]) { // Se usuário já existe
+        registerError.textContent = 'Usuário já existe.';
+        registerError.style.display = 'block'; // Exibe erro
+        return; // Para execução
+      }
+
+      // Salva novo usuário
+      users[username] = password;
+      saveUsers(users);
+
+      registerSuccess.textContent = 'Conta criada com sucesso! Agora faça login.'; // Mensagem sucesso
+      registerSuccess.style.display = 'block'; // Exibe mensagem sucesso
+
+      // Limpa campos após cadastro
+      registerUsername.value = '';
+      registerPassword.value = '';
+    });
+
+    // Evento ao clicar no botão de login
+    loginBtn.addEventListener('click', () => {
+      clearMessages(); // Limpa mensagens
+      const username = loginUsername.value.trim(); // Pega username login
+      const password = loginPassword.value.trim(); // Pega senha login
+
+      const users = getUsers(); // Obtém usuários cadastrados
+      if (users[username] && users[username] === password) { // Verifica se usuário e senha conferem
+        alert('Login realizado com sucesso!'); // Mensagem sucesso
+        window.location.href = 'index.html'; // Redireciona para página inicial
+      } else {
+        loginError.style.display = 'block'; // Exibe mensagem de erro login
+      }
+    });
+  </script>
+</body>
+</html>
